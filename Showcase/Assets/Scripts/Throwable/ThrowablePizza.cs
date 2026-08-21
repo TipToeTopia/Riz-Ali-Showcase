@@ -15,12 +15,4 @@ public class ThrowablePizza : MonoBehaviour
     {
         transform.Rotate(0, PizzaRotationSpeed * Time.deltaTime, 0);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "DeliverySlot")
-        {
-            Destroy(this);
-        }
-    }
 }
