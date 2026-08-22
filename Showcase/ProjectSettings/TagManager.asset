@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Throwable
   - DeliverySlot
+  - Manager
   layers:
   - Default
   - TransparentFX

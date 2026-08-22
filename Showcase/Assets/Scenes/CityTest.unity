@@ -324,7 +324,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4700845080475037144, guid: c64565a4f1445414ba5b5e36a81543d5, type: 3}
       propertyPath: m_Name
-      value: DeliverySlot (4)
+      value: DeliverySlot1
       objectReference: {fileID: 0}
     - target: {fileID: 5224778381445028571, guid: c64565a4f1445414ba5b5e36a81543d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -413,7 +413,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4700845080475037144, guid: c64565a4f1445414ba5b5e36a81543d5, type: 3}
       propertyPath: m_Name
-      value: DeliverySlot (3)
+      value: DeliverySlot4
       objectReference: {fileID: 0}
     - target: {fileID: 5224778381445028571, guid: c64565a4f1445414ba5b5e36a81543d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 915478805}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -568,6 +568,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b57730e502a67846a7e2b6f2950feab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSystemManager
+  DeliverySlots: []
+  SlotIndex: 0
+  NextActiveSlot: {fileID: 0}
 --- !u!1 &984949095
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +773,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4700845080475037144, guid: c64565a4f1445414ba5b5e36a81543d5, type: 3}
       propertyPath: m_Name
-      value: DeliverySlot (2)
+      value: DeliverySlot3
       objectReference: {fileID: 0}
     - target: {fileID: 5224778381445028571, guid: c64565a4f1445414ba5b5e36a81543d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -895,7 +898,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4700845080475037144, guid: c64565a4f1445414ba5b5e36a81543d5, type: 3}
       propertyPath: m_Name
-      value: DeliverySlot (1)
+      value: DeliverySlot2
       objectReference: {fileID: 0}
     - target: {fileID: 5224778381445028571, guid: c64565a4f1445414ba5b5e36a81543d5, type: 3}
       propertyPath: m_LocalPosition.x

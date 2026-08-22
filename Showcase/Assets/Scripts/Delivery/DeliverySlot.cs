@@ -7,10 +7,12 @@ public class DeliverySlot : MonoBehaviour
 
     bool DeliveryActive = false;
 
+    [SerializeField] GameObject GameManager;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        GameManager = GameObject.FindGameObjectWithTag("Manager");
     }
 
     // Update is called once per frame
@@ -21,17 +23,11 @@ public class DeliverySlot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //checking to see if the pizza has collided with the delivery slot
         if (other.CompareTag("Throwable") && DeliveryActive)
         {
             Destroy(other.gameObject);
-            Debug.Log("Delivery Done");
-
-            NewDeliverySlot();
-        }
-        else
-        {
-            Destroy(other.gameObject);
-            Debug.Log("Delivery Failed");
+            DeliveryComplete();
         }
     }
 
@@ -52,14 +48,9 @@ public class DeliverySlot : MonoBehaviour
         }
     }
 
-    void NewDeliverySlot()
+    void DeliveryComplete()
     {
-        GameObject[] DeliverySlots = GameObject.FindGameObjectsWithTag("DeliverySlot");
-        int index = Random.Range(0, DeliverySlots.Length);
-
-        GameObject NextActiveSlot = DeliverySlots[index];
-        NextActiveSlot.GetComponent<DeliverySlot>().UpdateDeliveryStatus(true);
-
+        GameManager.GetComponent<GameSystemManager>().NextDelivery(this.gameObject);
         UpdateDeliveryStatus(false);
     }
 }
