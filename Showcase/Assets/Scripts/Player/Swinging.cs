@@ -4,34 +4,59 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Swinging : MonoBehaviour
 {
+    public Camera playerCamera;
+    public Rigidbody playerRigidbody;
 
+    public float maxDistance = 100f;
+    public float pullForce = 20f;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, fwd, 100))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            print("There is something in front of the object!");
-            Debug.DrawRay(transform.position, fwd, Color.red);
+            //TryPull();
 
+            Ray ray = new Ray(
+            this.transform.position,
+            this.transform.forward
+            );
+
+            if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
+            {
+
+                Vector3 direction = (hit.transform.position - playerRigidbody.position).normalized;
+
+                playerRigidbody.AddForce(direction * pullForce, ForceMode.Force);
+
+            }
+            else
+                print("N/A");
         }
-        else
-            print("N/A");
 
+       
 
     }
+
+     
+
         
-    
+
+    void TryPull()
+    {
+        Ray ray = new Ray(
+            playerCamera.transform.position,
+            playerCamera.transform.forward
+        );
+
+        if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
+        {
+            Debug.Log("1");
+            // Pull toward the object we were looking at
+            Vector3 direction = (hit.transform.position - playerRigidbody.position).normalized;
+
+            playerRigidbody.AddForce(direction * pullForce, ForceMode.Force);
+        }
+    }
+
+
 }

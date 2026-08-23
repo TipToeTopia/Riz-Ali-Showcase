@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 210906278755064456}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.015125021, y: 0.22309417, z: -0.1361252}
+  m_LocalPosition: {x: 0.015125021, y: 1.22, z: -0.1361252}
   m_LocalScale: {x: 0.3781256, y: 0.3781256, z: 0.3781256}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -163,7 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5172551852772971059}
   - component: {fileID: 1943628817458932606}
-  - component: {fileID: 1501288106680270583}
+  - component: {fileID: 3311352928701718221}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -194,7 +194,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5827529339316348419}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1501288106680270583
+--- !u!114 &3311352928701718221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,6 +206,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf40152bca4f50479ae92dbfe7d4f0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Swinging
+  playerCamera: {fileID: 3434762936521222614}
+  playerRigidbody: {fileID: 6264034123176779889}
+  maxDistance: 500
+  pullForce: 5000
 --- !u!1 &5961660142615781662
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,8 +222,6 @@ GameObject:
   - component: {fileID: 2015642312053960048}
   - component: {fileID: 1785453001757508772}
   - component: {fileID: 5747629110947764252}
-  - component: {fileID: 4862303390641745795}
-  - component: {fileID: 5152181130257823012}
   - component: {fileID: 6264034123176779889}
   m_Layer: 0
   m_Name: BigYahu
@@ -324,45 +326,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4862303390641745795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5961660142615781662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8dc687fdaa13964e86cac3bb9ea6c05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  movementSpeed: 5
-  playerControls: {fileID: 5152181130257823012}
---- !u!143 &5152181130257823012
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5961660142615781662}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1.9999999
-  m_Radius: 0.49999997
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6264034123176779889
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -386,7 +349,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
