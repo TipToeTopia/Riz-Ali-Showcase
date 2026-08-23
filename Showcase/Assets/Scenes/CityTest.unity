@@ -1578,7 +1578,7 @@ MonoBehaviour:
   TipsNotifiText: {fileID: 2057164652}
   TipsNotifiFadeTime: 1.5
   GameTimerText: {fileID: 1547659516}
-  CurrentGameTime: 90
+  CurrentGameTime: 15
 --- !u!1001 &948342529
 PrefabInstance:
   m_ObjectHideFlags: 0
