@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 public class GameSystemManager : MonoBehaviour
 {
-
     [Header("Delivery Slot Data")]
     [SerializeField] List<GameObject> DeliverySlots;
     [SerializeField] int SlotIndex;
@@ -15,18 +15,20 @@ public class GameSystemManager : MonoBehaviour
     [Header("Cash Data")]
     public TextMeshProUGUI CashText;
     [SerializeField] int DeliveryCash = 15;
-    [SerializeField] int CurrentCashEarned;
+    public int CurrentCashEarned;
 
     [Header("Tips Data")]
     public TextMeshProUGUI TipsText;
     [SerializeField] int DeliveryTips;
-    [SerializeField] int CurrentTipsEarned;
+    public int CurrentTipsEarned;
     public TextMeshProUGUI TipsNotifiText;
     [SerializeField] float TipsNotifiFadeTime;
 
     [Header("Game Timer")]
     public TextMeshProUGUI GameTimerText;
     [SerializeField] float CurrentGameTime;
+
+    public static GameSystemManager Instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,20 +39,26 @@ public class GameSystemManager : MonoBehaviour
         SlotIndex = Random.Range(0, DeliverySlots.Count);
         GameObject FirstDeliverySlot = DeliverySlots[SlotIndex];
         FirstDeliverySlot.GetComponent<DeliverySlot>().UpdateDeliveryStatus(true);
+
+        Instance = this;
     }
 
     void Update()
     {
         //Game Timer Countdown
-        CurrentGameTime -= Time.deltaTime;
+        if(SceneManager.GetActiveScene().name == "CityTest")
+        {
+            CurrentGameTime -= Time.deltaTime;
         int timerMinutes = Mathf.FloorToInt(CurrentGameTime / 60);
         int timerSeconds = Mathf.FloorToInt(CurrentGameTime % 60);
         GameTimerText.text = string.Format("{0:00}:{1:00}", timerMinutes, timerSeconds);
 
-        if(CurrentGameTime < 1)
-        {
-            //End the game and move to results scene
-            Debug.Log("Shift Over");
+            if(CurrentGameTime < 1)
+            {
+                //End the game and move to results scene
+                SceneManager.LoadScene("EndResultsScene");
+                DontDestroyOnLoad(this);
+            }
         }
     }
 
