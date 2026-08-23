@@ -12,9 +12,15 @@ public class GameSystemManager : MonoBehaviour
     [SerializeField] int SlotIndex;
     [SerializeField] GameObject NextActiveDelivery;
 
-    [Header("Cash and Tips Data")]
+    [Header("Cash Data")]
+    public TextMeshProUGUI CashText;
     [SerializeField] int DeliveryCash = 15;
+    [SerializeField] int CurrentCashEarned;
+
+    [Header("Tips Data")]
+    public TextMeshProUGUI TipsText;
     [SerializeField] int DeliveryTips;
+    [SerializeField] int CurrentTipsEarned;
     public TextMeshProUGUI TipsNotifiText;
     [SerializeField] float TipsNotifiFadeTime;
 
@@ -68,8 +74,13 @@ public class GameSystemManager : MonoBehaviour
         DeliveryTips = Random.Range(1, 15);
         Debug.Log("You got $" + DeliveryCash + " for a delivery!");
         Debug.Log("You got $" + DeliveryTips + " as a tip!");
-
         StartCoroutine(TipsNotifi());
+
+        CurrentCashEarned += DeliveryCash;
+        CashText.text = ("Cash Earned: $" + CurrentCashEarned);
+
+        CurrentTipsEarned += DeliveryTips;
+        TipsText.text = ("Tips Earned: $" + CurrentTipsEarned);
     }
 
     IEnumerator TipsNotifi()

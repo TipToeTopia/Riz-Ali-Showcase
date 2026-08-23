@@ -1569,8 +1569,12 @@ MonoBehaviour:
   DeliverySlots: []
   SlotIndex: 0
   NextActiveDelivery: {fileID: 0}
+  CashText: {fileID: 1576499600}
   DeliveryCash: 15
+  CurrentCashEarned: 0
+  TipsText: {fileID: 1892967353}
   DeliveryTips: 0
+  CurrentTipsEarned: 0
   TipsNotifiText: {fileID: 2057164652}
   TipsNotifiFadeTime: 1.5
   GameTimerText: {fileID: 1547659516}
@@ -2502,7 +2506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cash Earned: $150'
+  m_text: 'Cash Earned: $0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2831,7 +2835,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Tips Earned: $150'
+  m_text: 'Tips Earned: $0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3203,7 +3207,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057164650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
