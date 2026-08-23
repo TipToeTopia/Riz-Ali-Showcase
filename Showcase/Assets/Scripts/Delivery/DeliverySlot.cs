@@ -12,6 +12,8 @@ public class DeliverySlot : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Finding and setting GameManager
+        // Should we be using tag??
         GameManager = GameObject.FindGameObjectWithTag("Manager");
     }
 
@@ -33,6 +35,7 @@ public class DeliverySlot : MonoBehaviour
 
     public void UpdateDeliveryStatus(bool SlotActive)
     {
+        //Setting collision trigger and material
         if (SlotActive == true)
         {
             this.GetComponent<Renderer>().material = MaterialActive;
@@ -50,6 +53,7 @@ public class DeliverySlot : MonoBehaviour
 
     void DeliveryComplete()
     {
+        //Calling manager to pick a new delivery whilst disabling and excluding this delivery
         GameManager.GetComponent<GameSystemManager>().NextDelivery(this.gameObject);
         UpdateDeliveryStatus(false);
     }

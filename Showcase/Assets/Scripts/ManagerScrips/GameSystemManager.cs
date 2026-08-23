@@ -40,6 +40,7 @@ public class GameSystemManager : MonoBehaviour
         GameObject FirstDeliverySlot = DeliverySlots[SlotIndex];
         FirstDeliverySlot.GetComponent<DeliverySlot>().UpdateDeliveryStatus(true);
 
+        //Setting the GSM Instance
         Instance = this;
     }
 
@@ -64,7 +65,7 @@ public class GameSystemManager : MonoBehaviour
 
     public void NextDelivery(GameObject PreviousDelivery)
     {
-        //Preventing the previous slot from being selected again in the list
+        //Preventing the previous slot from being selected again in the list - adding it back later
         //Selecting the next delivery slot
         DeliverySlots.Remove(PreviousDelivery);
         SlotIndex = Random.Range(0, DeliverySlots.Count);
@@ -103,6 +104,7 @@ public class GameSystemManager : MonoBehaviour
             yield return null;
         }
 
+        //Reseting the notifi text
         yield return new WaitForSeconds(1f);
         TipsNotifiText.enabled = false;
         TipsNotifiText.color = new Color32(255, 255, 255, 255);
