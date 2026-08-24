@@ -81,13 +81,9 @@ public class GameSystemManager : MonoBehaviour
 
         //Currently getting a random int for the tip
         DeliveryTips = Random.Range(1, 15);
-        Debug.Log("You got $" + DeliveryCash + " for a delivery!");
-        Debug.Log("You got $" + DeliveryTips + " as a tip!");
         StartCoroutine(TipsNotifi());
-
         CurrentCashEarned += DeliveryCash;
         CashText.text = ("Cash Earned: $" + CurrentCashEarned);
-
         CurrentTipsEarned += DeliveryTips;
         TipsText.text = ("Tips Earned: $" + CurrentTipsEarned);
     }
