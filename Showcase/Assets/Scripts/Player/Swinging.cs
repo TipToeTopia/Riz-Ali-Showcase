@@ -4,57 +4,51 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Swinging : MonoBehaviour
 {
-    public Camera playerCamera;
-    public Rigidbody playerRigidbody;
+    [SerializeField]
+    private Camera playerCamera;
+    [SerializeField]
+    private float pullSpeed = 10f;
+    [SerializeField]
+    private float maxDistance = 50f;
+    [SerializeField]
+    private KeyCode pullButton = KeyCode.E;
 
-    public float maxDistance = 100f;
-    public float pullForce = 20f;
+    private bool isPulling;
+    private Vector3 targetPoint;
+
+    private const float STOPPPING_POINT = 10f;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        // Press E to pull toward whatever you're looking at
+        if (Input.GetKeyDown(pullButton) && !isPulling)
         {
-            //TryPull();
-
             Ray ray = new Ray(
-            this.transform.position,
-            this.transform.forward
+                playerCamera.transform.position,
+                playerCamera.transform.forward
             );
 
             if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
             {
-
-                Vector3 direction = (hit.transform.position - playerRigidbody.position).normalized;
-
-                playerRigidbody.AddForce(direction * pullForce, ForceMode.Force);
-
+                targetPoint = hit.point;
+                isPulling = true;
             }
-            else
-                print("N/A");
         }
 
-       
-
-    }
-
-     
-
-        
-
-    void TryPull()
-    {
-        Ray ray = new Ray(
-            playerCamera.transform.position,
-            playerCamera.transform.forward
-        );
-
-        if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
+        // Move toward target
+        if (isPulling)
         {
-            Debug.Log("1");
-            // Pull toward the object we were looking at
-            Vector3 direction = (hit.transform.position - playerRigidbody.position).normalized;
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                targetPoint,
+                pullSpeed * Time.deltaTime
+            );
 
-            playerRigidbody.AddForce(direction * pullForce, ForceMode.Force);
+            // Stop when close enough
+            if (Vector3.Distance(transform.position, targetPoint) < STOPPPING_POINT)
+            {
+                isPulling = false;
+            }
         }
     }
 

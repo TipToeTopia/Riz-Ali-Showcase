@@ -19,8 +19,8 @@ public class PlayerLook : MonoBehaviour
     private const string X_MOUSE = "Mouse X";
     private const string Y_MOUSE = "Mouse Y";
 
-    private const float MAXIMUM_CLAMP = 90.0f;
-    private const float MINIMUM_CLAMP = -90.0f;
+    private const float MAXIMUM_CLAMP = 120.0f;
+    private const float MINIMUM_CLAMP = -120.0f;
 
     void Start()
     {
