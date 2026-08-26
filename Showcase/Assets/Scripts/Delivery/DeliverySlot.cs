@@ -53,6 +53,13 @@ public class DeliverySlot : MonoBehaviour
 
     void DeliveryComplete()
     {
+        // TO DO
+        // This could be the place to start a timer, once next delivery is called we stop the timer. Could use this number as an index for the tips earned
+
+
+        GameManager.GetComponent<GameSystemManager>().isTipTiming = false;
+
+
         //Calling manager to pick a new delivery whilst disabling and excluding this delivery
         GameManager.GetComponent<GameSystemManager>().NextDelivery(this.gameObject);
         UpdateDeliveryStatus(false);

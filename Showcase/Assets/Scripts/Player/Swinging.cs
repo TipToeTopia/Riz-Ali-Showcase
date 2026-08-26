@@ -20,7 +20,7 @@ public class Swinging : MonoBehaviour
 
     void Update()
     {
-        // Press E to pull toward whatever you're looking at
+        // Press assigned button to pull toward whatever you're looking at
         if (Input.GetKeyDown(pullButton) && !isPulling)
         {
             Ray ray = new Ray(

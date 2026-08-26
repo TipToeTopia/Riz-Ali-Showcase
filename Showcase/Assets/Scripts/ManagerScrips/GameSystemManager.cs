@@ -1,9 +1,11 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEngine.SceneManagement;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class GameSystemManager : MonoBehaviour
 {
@@ -24,9 +26,16 @@ public class GameSystemManager : MonoBehaviour
     public TextMeshProUGUI TipsNotifiText;
     [SerializeField] float TipsNotifiFadeTime;
 
+    [HideInInspector]
+    public float TipTimer = 0f;
+    [HideInInspector]
+    public bool isTipTiming;
+
     [Header("Game Timer")]
     public TextMeshProUGUI GameTimerText;
     [SerializeField] float CurrentGameTime;
+
+
 
     public static GameSystemManager Instance;
 
@@ -42,6 +51,22 @@ public class GameSystemManager : MonoBehaviour
 
         //Setting the GSM Instance
         Instance = this;
+
+        isTipTiming = true;
+    }
+
+    // Singleton for GM, as we only ever want one
+    void Awake()
+    {
+        if (Instance)
+        {
+            DestroyImmediate(gameObject);
+            return;
+        }
+
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -60,24 +85,45 @@ public class GameSystemManager : MonoBehaviour
                 SceneManager.LoadScene("EndResultsScene");
                 DontDestroyOnLoad(this);
             }
+
+            if (isTipTiming == true)
+            {
+                TipTimer = TipTimer + Time.deltaTime;
+                Debug.Log(TipTimer);
+
+            }
+
+       
         }
+
     }
 
     public void NextDelivery(GameObject PreviousDelivery)
     {
         //Preventing the previous slot from being selected again in the list - adding it back later
         //Selecting the next delivery slot
+
         DeliverySlots.Remove(PreviousDelivery);
         SlotIndex = Random.Range(0, DeliverySlots.Count);
         NextActiveDelivery = DeliverySlots[SlotIndex];
         NextActiveDelivery.GetComponent<DeliverySlot>().UpdateDeliveryStatus(true);
         GiveCashAndTips();
         DeliverySlots.Add(PreviousDelivery);
+
+        TipTimer = 0;
+        isTipTiming = true;
+        
+
     }
 
     void GiveCashAndTips()
     {
         //SHOULD MAKE TIP VALUE BE BASED ON HOW QUICK PLAYER DELIVERS
+
+        // TO DO
+        // This could be the place to then use our timer value with prortion to the cash given to the player
+        // Im thinking we could divide a constant 1 over the timer to give us a multiplier, lets say at a perfect 1 second score we 
+        // have a max tip of $300, constant 1 / 1 second score = 1, 1 x 300 = 300
 
         //Currently getting a random int for the tip
         DeliveryTips = Random.Range(1, 15);
