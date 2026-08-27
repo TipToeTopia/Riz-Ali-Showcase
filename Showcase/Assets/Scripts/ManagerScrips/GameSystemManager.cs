@@ -21,6 +21,9 @@ public class GameSystemManager : MonoBehaviour
     public int CurrentCashEarned;
 
     [HideInInspector]
+    public int highScore;
+
+    [HideInInspector]
     public int CashHighScore;
 
     [Header("Tips Data")]
@@ -39,7 +42,7 @@ public class GameSystemManager : MonoBehaviour
     public TextMeshProUGUI GameTimerText;
     [SerializeField] float CurrentGameTime;
 
-    public int highScore;
+ 
 
 
 
@@ -98,15 +101,12 @@ public class GameSystemManager : MonoBehaviour
             }
 
             
-
+            // delete save for testing
             if (Input.GetKeyDown(KeyCode.E))
             {
                 PlayerPrefs.DeleteKey("HighScore");
                 Debug.Log("delete save" + highScore);
             }
-
-            Debug.Log("current high score" + highScore);
-
 
 
         }
@@ -132,7 +132,7 @@ public class GameSystemManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("HighScore", CurrentCashEarned);
             PlayerPrefs.Save();
-            Debug.Log(highScore);
+            //Debug.Log(highScore);
         }
 
 
