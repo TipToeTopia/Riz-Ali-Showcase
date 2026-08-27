@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class GameSystemManager : MonoBehaviour
@@ -18,6 +19,9 @@ public class GameSystemManager : MonoBehaviour
     public TextMeshProUGUI CashText;
     [SerializeField] int DeliveryCash = 15;
     public int CurrentCashEarned;
+
+    [HideInInspector]
+    public int CashHighScore;
 
     [Header("Tips Data")]
     public TextMeshProUGUI TipsText;
@@ -34,6 +38,8 @@ public class GameSystemManager : MonoBehaviour
     [Header("Game Timer")]
     public TextMeshProUGUI GameTimerText;
     [SerializeField] float CurrentGameTime;
+
+    public int highScore;
 
 
 
@@ -53,6 +59,11 @@ public class GameSystemManager : MonoBehaviour
         Instance = this;
 
         isTipTiming = true;
+
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        
+
+
     }
 
     // Singleton for GM, as we only ever want one
@@ -86,14 +97,18 @@ public class GameSystemManager : MonoBehaviour
                 DontDestroyOnLoad(this);
             }
 
-            /*if (isTipTiming == true)
+            
+
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                TipTimer = TipTimer -= Time.deltaTime;
-                Debug.Log(TipTimer);
+                PlayerPrefs.DeleteKey("HighScore");
+                Debug.Log("delete save" + highScore);
+            }
 
-            }*/
+            Debug.Log("current high score" + highScore);
 
-       
+
+
         }
 
     }
@@ -112,7 +127,14 @@ public class GameSystemManager : MonoBehaviour
 
         TipTimer = 20;
         isTipTiming = true;
-        
+
+        if (CurrentCashEarned > highScore)
+        {
+            PlayerPrefs.SetInt("HighScore", CurrentCashEarned);
+            PlayerPrefs.Save();
+            Debug.Log(highScore);
+        }
+
 
     }
 
