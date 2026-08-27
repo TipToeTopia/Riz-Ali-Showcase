@@ -27,7 +27,7 @@ public class GameSystemManager : MonoBehaviour
     [SerializeField] float TipsNotifiFadeTime;
 
     [HideInInspector]
-    public float TipTimer = 0f;
+    public float TipTimer = 20f;
     [HideInInspector]
     public bool isTipTiming;
 
@@ -86,19 +86,19 @@ public class GameSystemManager : MonoBehaviour
                 DontDestroyOnLoad(this);
             }
 
-            if (isTipTiming == true)
+            /*if (isTipTiming == true)
             {
-                TipTimer = TipTimer + Time.deltaTime;
+                TipTimer = TipTimer -= Time.deltaTime;
                 Debug.Log(TipTimer);
 
-            }
+            }*/
 
        
         }
 
     }
 
-    public void NextDelivery(GameObject PreviousDelivery)
+    public void NextDelivery(GameObject PreviousDelivery, int TipValue)
     {
         //Preventing the previous slot from being selected again in the list - adding it back later
         //Selecting the next delivery slot
@@ -107,16 +107,16 @@ public class GameSystemManager : MonoBehaviour
         SlotIndex = Random.Range(0, DeliverySlots.Count);
         NextActiveDelivery = DeliverySlots[SlotIndex];
         NextActiveDelivery.GetComponent<DeliverySlot>().UpdateDeliveryStatus(true);
-        GiveCashAndTips();
+        GiveCashAndTips(TipValue);
         DeliverySlots.Add(PreviousDelivery);
 
-        TipTimer = 0;
+        TipTimer = 20;
         isTipTiming = true;
         
 
     }
 
-    void GiveCashAndTips()
+    void GiveCashAndTips(int TipAmount)
     {
         //SHOULD MAKE TIP VALUE BE BASED ON HOW QUICK PLAYER DELIVERS
 
@@ -126,7 +126,7 @@ public class GameSystemManager : MonoBehaviour
         // have a max tip of $300, constant 1 / 1 second score = 1, 1 x 300 = 300
 
         //Currently getting a random int for the tip
-        DeliveryTips = Random.Range(1, 15);
+        DeliveryTips = TipAmount;
         StartCoroutine(TipsNotifi());
         CurrentCashEarned += DeliveryCash;
         CashText.text = ("Cash Earned: $" + CurrentCashEarned);

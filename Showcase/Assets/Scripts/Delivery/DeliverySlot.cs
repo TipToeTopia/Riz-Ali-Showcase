@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class DeliverySlot : MonoBehaviour
@@ -8,6 +10,7 @@ public class DeliverySlot : MonoBehaviour
     bool DeliveryActive = false;
 
     [SerializeField] GameObject GameManager;
+    [SerializeField] float TipTimer = 20f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,6 +45,7 @@ public class DeliverySlot : MonoBehaviour
             this.GetComponent<Collider>().enabled = true;
             this.GetComponent<Collider>().isTrigger = true;
             DeliveryActive = true;
+            StartCoroutine(BeginTipTimer());
         }
         else
         {
@@ -53,15 +57,27 @@ public class DeliverySlot : MonoBehaviour
 
     void DeliveryComplete()
     {
-        // TO DO
-        // This could be the place to start a timer, once next delivery is called we stop the timer. Could use this number as an index for the tips earned
+        //GameManager.GetComponent<GameSystemManager>().isTipTiming = false;
 
-
-        GameManager.GetComponent<GameSystemManager>().isTipTiming = false;
-
+        //Rounding and converting value to int and ensuring the Tip value cannot be 0 --- Int16 because we dont need the higher capacity of int32 or int64
+        int TipTimerValue = Convert.ToInt16(Mathf.RoundToInt(TipTimer));
+        if (TipTimerValue < 1)
+        {
+            TipTimerValue = 1;
+        }
 
         //Calling manager to pick a new delivery whilst disabling and excluding this delivery
-        GameManager.GetComponent<GameSystemManager>().NextDelivery(this.gameObject);
+        GameManager.GetComponent<GameSystemManager>().NextDelivery(this.gameObject, TipTimerValue);
         UpdateDeliveryStatus(false);
+    }
+
+    //Tip timer counting down as long as the Delivery slot is active.
+    IEnumerator BeginTipTimer()
+    {
+        while (DeliveryActive)
+        {
+            TipTimer -= Time.deltaTime;
+            yield return null;
+        }
     }
 }
