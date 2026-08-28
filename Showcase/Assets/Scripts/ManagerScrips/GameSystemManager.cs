@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,8 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class GameSystemManager : MonoBehaviour
 {
+    public SceneAsset GameScene;
+
     [Header("Delivery Slot Data")]
     [SerializeField] List<GameObject> DeliverySlots;
     [SerializeField] int SlotIndex;
@@ -41,11 +44,6 @@ public class GameSystemManager : MonoBehaviour
     [Header("Game Timer")]
     public TextMeshProUGUI GameTimerText;
     [SerializeField] float CurrentGameTime;
-
- 
-
-
-
     public static GameSystemManager Instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -86,7 +84,7 @@ public class GameSystemManager : MonoBehaviour
     void Update()
     {
         //Game Timer Countdown
-        if(SceneManager.GetActiveScene().name == "CityTest")
+        if(SceneManager.GetActiveScene().name == GameScene.name)
         {
             CurrentGameTime -= Time.deltaTime;
         int timerMinutes = Mathf.FloorToInt(CurrentGameTime / 60);
