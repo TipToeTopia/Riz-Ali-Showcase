@@ -7,6 +7,8 @@ public class ThrowableCooldown : MonoBehaviour
     [SerializeField] float ThrowCooldown = 1;
     public Image CooldownImage;
 
+    public GameObject Throwable;
+
 
     // Update is called once per frame
     void Update()
@@ -14,7 +16,10 @@ public class ThrowableCooldown : MonoBehaviour
         //Input to throw the Pizza
         if (Input.GetMouseButtonDown(1) && ThrowCooldown == 1)
         {
+            //Throwing pizza and starting cooldown
             StartCoroutine(StartCooldown());
+            Instantiate(Throwable, this.gameObject.transform.position, this.gameObject.transform.rotation);
+
         }
     }
 
