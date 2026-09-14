@@ -28,8 +28,12 @@ public class Swinging : MonoBehaviour
                 playerCamera.transform.forward
             );
 
+
             if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
             {
+                if (hit.collider.gameObject.tag == "Floor")
+                    return;
+
                 targetPoint = hit.point;
                 isPulling = true;
             }

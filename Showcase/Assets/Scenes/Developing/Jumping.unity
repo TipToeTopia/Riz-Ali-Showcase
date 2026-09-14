@@ -372,7 +372,7 @@ GameObject:
   - component: {fileID: 157286762}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1455,6 +1455,10 @@ PrefabInstance:
     - target: {fileID: 3925273532818635262, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137068147799101977, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
+      propertyPath: pullSpeed
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5961660142615781662, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
       propertyPath: m_Name
