@@ -1,33 +1,52 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private const string HORIZONTAL_AXIS = "Horizontal";
-    private const string VERTICAL_AXIS = "Vertical";
+
+    private Rigidbody m_Rigidbody;
 
     [SerializeField]
-    private float movementSpeed = 5.0f;
+    private float m_Speed;
 
-    [SerializeField]
-    private CharacterController playerControls;
 
-    private Vector3 playerVelocity;
+    private bool isGrounded;
 
-    private float playerGravity = -20.0f;
+    void Start()
+    {
+
+        m_Rigidbody = GetComponent<Rigidbody>();
+
+
+    }
 
     void Update()
     {
-        float x = Input.GetAxis(HORIZONTAL_AXIS);
-        float z = Input.GetAxis(VERTICAL_AXIS);
+        if (Input.GetKey(KeyCode.W) && isGrounded == true)
+        {
 
-        Vector3 move = (transform.right * x) + (transform.forward * z);
-        playerControls.Move(move * (movementSpeed * Time.deltaTime));
-
-        playerVelocity.y += playerGravity * Time.deltaTime;
-        playerControls.Move(playerVelocity * Time.deltaTime);
+            m_Rigidbody.linearVelocity = transform.forward * m_Speed;
+        }
 
     }
- 
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            isGrounded = false;
+        }
+    }
+
 }

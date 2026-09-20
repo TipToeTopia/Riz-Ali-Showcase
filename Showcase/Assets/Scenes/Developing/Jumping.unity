@@ -231,6 +231,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 91478610}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &112955949 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5961660142615781662, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
+  m_PrefabInstance: {fileID: 3281829373667064761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &112955950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112955949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8dc687fdaa13964e86cac3bb9ea6c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  m_Speed: 15
 --- !u!1 &133896271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,7 +1440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3925273532818635262, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 59
+      value: 60.36
       objectReference: {fileID: 0}
     - target: {fileID: 3925273532818635262, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1460,6 +1478,18 @@ PrefabInstance:
       propertyPath: pullSpeed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5747629110947764252, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
+      propertyPath: m_Height
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5747629110947764252, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5747629110947764252, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5961660142615781662, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
       propertyPath: m_Name
       value: BigYahu
@@ -1467,7 +1497,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5961660142615781662, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 112955950}
   m_SourcePrefab: {fileID: 100100000, guid: f3d037e0deb7e0748b8d7984c6fe62d9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
